@@ -1,0 +1,66 @@
+name: Check Index is Synced
+
+on:
+  pull_request:
+    paths:
+      - '**/metadata.yaml'
+      - 'README.md'
+      - 'docs/README-es.md'
+    branches:
+      - master
+
+jobs:
+  check-sync:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: 📥 Checkout repository
+        uses: actions/checkout@v4
+
+      - name: 🐹 Set up Go
+        uses: actions/setup-go@v5
+        with:
+          go-version: '1.22'
+          cache: true
+
+      - name: 🔨 Build Go binaries
+        run: make build
+
+      - name: 💾 Save current READMEs
+        run: |
+          cp README.md README.md.backup
+          cp docs/README-es.md docs/README-es.md.backup
+
+      - name: 🔄 Regenerate index
+        run: bin/generate-index
+
+      - name: 🔍 Check if index is in sync
+        run: |
+          if ! diff -q README.md README.md.backup; then
+            echo "❌ README.md is out of sync with metadata!"
+            echo "Run 'make update-index' to sync the index."
+            echo ""
+            echo "## ⚠️ Index Out of Sync" >> $GITHUB_STEP_SUMMARY
+            echo "" >> $GITHUB_STEP_SUMMARY
+            echo "The talks index in README.md doesn't match the metadata files." >> $GITHUB_STEP_SUMMARY
+            echo "" >> $GITHUB_STEP_SUMMARY
+            echo "**To fix:** Run \`make update-index\` and commit the changes." >> $GITHUB_STEP_SUMMARY
+            exit 1
+          fi
+
+          if ! diff -q docs/README-es.md docs/README-es.md.backup; then
+            echo "❌ docs/README-es.md is out of sync with metadata!"
+            echo "Run 'make update-index' to sync the index."
+            echo ""
+            echo "## ⚠️ Index Out of Sync" >> $GITHUB_STEP_SUMMARY
+            echo "" >> $GITHUB_STEP_SUMMARY
+            echo "The talks index in docs/README-es.md doesn't match the metadata files." >> $GITHUB_STEP_SUMMARY
+            echo "" >> $GITHUB_STEP_SUMMARY
+            echo "**To fix:** Run \`make update-index\` and commit the changes." >> $GITHUB_STEP_SUMMARY
+            exit 1
+          fi
+
+          echo "✅ Index is in sync with metadata!"
+          echo "## ✅ Index Synced" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "All talk indexes are properly synced with metadata files." >> $GITHUB_STEP_SUMMARY

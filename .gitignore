@@ -1,0 +1,42 @@
+# Go
+bin/
+*.exe
+*.exe~
+*.dll
+*.so
+*.dylib
+*.test
+*.out
+go.work
+
+# Pre-commit
+.pre-commit-cache/
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log
+
+# Terramate
+_generated.*
+_sharing.tf
+
+# Terraform
+*.tfstate
+*.tfstate.*
+*.tfvars
+*.tfvars.json
+*.terraform.tfstate.backup
+*.terraform.tfstate.backup.lock.info
+*.terraform.tfstate.lock.info
+*.terraform.tfstate.lock.info.backup
+*.terraform.tfstate.lock.info.backup.lock.info

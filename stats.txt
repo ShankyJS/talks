@@ -1,0 +1,24 @@
+## 📊 Talk Statistics
+
+### 🎤 Total Talks: 1
+
+- **Past Talks**: 0
+- **Upcoming Talks**: 1
+
+### 📅 Talks by Year
+
+- **2025**: 1 █
+
+### 🏷️ Most Popular Topics
+
+- **GitOps**: 1 █
+- **AWS**: 1 █
+- **Kubernetes**: 1 █
+
+### 🎪 Events
+
+- **October 30th Cloud Native Vancouver event**: 1 talks
+
+### 🔜 Upcoming Talks
+
+- **2025-10-30**: Intro To Flux With EKS @ October 30th Cloud Native Vancouver event

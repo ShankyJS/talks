@@ -1,0 +1,42 @@
+name: Validate Talks Metadata
+
+on:
+  pull_request:
+    paths:
+      - '**/metadata.yaml'
+      - '20**/**'
+      - 'cmd/**'
+  push:
+    branches:
+      - master
+  workflow_dispatch:
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: 📥 Checkout repository
+        uses: actions/checkout@v4
+
+      - name: 🐹 Set up Go
+        uses: actions/setup-go@v5
+        with:
+          go-version: '1.22'
+          cache: true
+
+      - name: 🔨 Build Go binaries
+        run: make build
+
+      - name: 🔍 Validate metadata files
+        run: bin/check-metadata
+
+      - name: 📊 Generate validation report
+        if: always()
+        run: |
+          echo "## 📋 Validation Results" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          bin/check-metadata >> $GITHUB_STEP_SUMMARY 2>&1 || true
+
+      - name: ✅ All checks passed
+        run: echo "✨ All talk metadata is valid!"

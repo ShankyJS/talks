@@ -1,0 +1,15 @@
+# Talk Metadata
+# This file is used to automatically generate the talks index
+
+title: "Intro To Flux With EKS"
+date: "2025-10-30"  # YYYY-MM-DD format
+event: "October 30th Cloud Native Vancouver event"  # Conference/Meetup name and location
+topics:
+  - GitOps
+  - AWS
+  - Kubernetes
+description: "This talk will cover the basics of Flux with EKS, including how to deploy a Flux application and how to use Flux with EKS."
+
+# Optional fields
+slides_url: ""  # Link to slides (if hosted separately)
+video_url: ""   # Link to recording (after the talk)

@@ -1,0 +1,43 @@
+name: Generate Talk Statistics
+
+on:
+  push:
+    branches:
+      - master
+  workflow_dispatch:
+  schedule:
+    - cron: '0 0 * * 0'  # Weekly on Sundays at midnight UTC
+
+jobs:
+  stats:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: 📥 Checkout repository
+        uses: actions/checkout@v4
+
+      - name: 🐹 Set up Go
+        uses: actions/setup-go@v5
+        with:
+          go-version: '1.22'
+          cache: true
+
+      - name: 🔨 Build Go binaries
+        run: make build
+
+      - name: 📊 Generate statistics
+        run: bin/generate-stats
+        continue-on-error: true
+
+      - name: 📈 Display stats in summary
+        if: always()
+        run: |
+          if [ -f stats.txt ]; then
+            cat stats.txt >> $GITHUB_STEP_SUMMARY
+          else
+            echo "## 📊 Talk Statistics" >> $GITHUB_STEP_SUMMARY
+            echo "" >> $GITHUB_STEP_SUMMARY
+            echo "Statistics generation coming soon!" >> $GITHUB_STEP_SUMMARY
+          fi
+
+# To do, commit back to the master branch.

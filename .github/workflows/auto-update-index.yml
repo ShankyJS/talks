@@ -1,0 +1,54 @@
+name: Auto-Update Talks Index
+
+on:
+  push:
+    branches:
+      - master
+    paths:
+      - '**/metadata.yaml'
+      - '20**/**'  # Any year directory
+  workflow_dispatch:  # Allow manual trigger
+
+permissions:
+  contents: write
+
+jobs:
+  update-index:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: 📥 Checkout repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0  # Full history for proper commits
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: 🐹 Set up Go
+        uses: actions/setup-go@v5
+        with:
+          go-version: '1.22'
+          cache: true
+
+      - name: 🔨 Build Go binaries
+        run: make build
+
+      - name: 🔄 Generate talks index
+        run: bin/generate-index
+
+      - name: 🔍 Check for changes
+        id: git-check
+        run: |
+          git diff --exit-code README.md docs/README-es.md || echo "changes=true" >> $GITHUB_OUTPUT
+
+      - name: 💾 Commit and push if changed
+        if: steps.git-check.outputs.changes == 'true'
+        run: |
+          git config --local user.email "github-actions[bot]@users.noreply.github.com"
+          git config --local user.name "github-actions[bot]"
+          git add README.md docs/README-es.md
+          git commit -m "🤖 Auto-update talks index [skip ci]"
+          git push
+
+      - name: ✅ No changes needed
+        if: steps.git-check.outputs.changes != 'true'
+        run: echo "📚 Index is already up to date!"
