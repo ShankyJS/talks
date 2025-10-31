@@ -11,5 +11,5 @@ topics:
 description: "This talk will cover the basics of Flux with EKS, including how to deploy a Flux application and how to use Flux with EKS."
 
 # Optional fields
-slides_url: ""  # Link to slides (if hosted separately)
+slides_url: "https://slides.com/shankyjs_/intro-to-flux-cd-with-eks"  # Link to slides (if hosted separately)
 video_url: ""   # Link to recording (after the talk)
