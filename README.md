@@ -30,8 +30,8 @@ Each talk includes:
 ## 📊 Statistics
 
 - 🎤 **Total Talks**: 1
-- ✅ **Past**: 0
-- 🔜 **Upcoming**: 1
+- ✅ **Past**: 1
+- 🔜 **Upcoming**: 0
 - 🏷️ **Top Topics**: AWS (1), GitOps (1), Kubernetes (1)
 
 ## 📑 Talks Index
