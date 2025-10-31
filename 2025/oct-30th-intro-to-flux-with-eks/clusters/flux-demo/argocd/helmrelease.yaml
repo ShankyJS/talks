@@ -1,0 +1,45 @@
+apiVersion: helm.toolkit.fluxcd.io/v2beta1
+kind: HelmRelease
+metadata:
+  name: argocd
+  namespace: argocd
+spec:
+  interval: 10m
+  chart:
+    spec:
+      chart: argo-cd
+      version: '9.0.5'  # Latest ArgoCD chart version
+      sourceRef:
+        kind: HelmRepository
+        name: argo
+        namespace: argocd
+      interval: 5m
+  install:
+    createNamespace: true
+    remediation:
+      retries: 3
+  upgrade:
+    remediation:
+      retries: 3
+  values:
+    global:
+      domain: argocd.local
+
+    # Server configuration
+    server:
+      service:
+        type: LoadBalancer
+      # Disable TLS for demo purposes
+      extraArgs:
+        - --insecure
+
+    # Disable Dex (SSO) for demo
+    dex:
+      enabled: false
+
+    # Use admin password from the default secret
+    configs:
+      secret:
+        createSecret: true
+      params:
+        server.insecure: true

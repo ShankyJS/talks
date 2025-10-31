@@ -55,26 +55,11 @@ module "eks" {
   enable_irsa = true
 
   # Enable cluster creator admin access
+  # This automatically grants your SSO role cluster admin permissions
   enable_cluster_creator_admin_permissions = true
 
   vpc_id     = module.vpc.vpc_id
   subnet_ids = module.vpc.private_subnets
-
-  # EKS Access Entries for SSO Admin access
-  access_entries = {
-    # Your SSO AdministratorAccess role
-    admin_sso = {
-      principal_arn = "arn:aws:iam::${local.account_id}:role/aws-reserved/sso.amazonaws.com/${var.admin_sso_role_name}"
-      policy_associations = {
-        admin = {
-          policy_arn = "arn:aws:eks::aws:cluster-access-policy/AmazonEKSClusterAdminPolicy"
-          access_scope = {
-            type = "cluster"
-          }
-        }
-      }
-    }
-  }
 
   # Cluster addons
   cluster_addons = {

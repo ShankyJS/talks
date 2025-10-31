@@ -23,7 +23,7 @@ terraform {
 
 terraform {
   backend "s3" {
-    bucket         = "flux-eks-demo-tfstate-0mw37gze"
+    bucket         = "flux-eks-demo-tfstate-9qfmn2vg"
     dynamodb_table = "flux-eks-demo-tfstate-locks"
     encrypt        = true
     key            = "flux/terraform.tfstate"

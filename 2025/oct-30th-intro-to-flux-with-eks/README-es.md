@@ -95,21 +95,35 @@ La demo está organizada en 3 stacks de Terramate que se construyen uno sobre ot
 ```bash
 cd live/
 
-terramate generate # Genera tu configuración
-# Inicializa y aplica todos los stacks en orden
+# Paso 1: Generar configuración de Terramate
+terramate generate
+
+# Paso 2: Aplicar el stack de backend S3 primero (usa estado local)
+cd 01-s3-backend
+terraform init
+terraform apply
+cd ..
+
+# Paso 3: Configurar backend en otros stacks
+# La configuración del backend será auto-generada por Terramate
+# Los stacks 02-eks-cluster y 03-flux usarán el backend S3
+
+# Paso 4: Aplicar los stacks restantes en orden
 terramate run -- sh -c 'terraform init && terraform apply'
 
-# O aplica cada stack individualmente:
-terramate run --tags s3-backend -- terraform apply
-terramate run --tags eks-cluster -- terraform apply
-terramate run --tags flux -- terraform apply
-
+# Paso 5: Actualizar kubeconfig y verificar
 ./scripts/update-kubeconfigs.sh
-# Verifica la instalación de Flux
 kubectl get pods -n flux-system
 
 # Limpieza (destruye en orden inverso)
-terramate run --reverse -- terraform destroy --auto-approve
+terramate run --reverse -- sh -c 'terraform init && terraform destroy --auto-approve'
+```
+
+**Alternativa: Aplicar stacks individualmente**
+```bash
+terramate run --tags s3-backend -- terraform apply
+terramate run --tags eks-cluster -- terraform apply
+terramate run --tags flux -- terraform apply
 ```
 
 ### Solución de Problemas
