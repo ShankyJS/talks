@@ -1,0 +1,48 @@
+repositories:
+  - name: jaegertracing
+    url: https://jaegertracing.github.io/helm-charts
+  - name: open-telemetry
+    url: https://open-telemetry.github.io/opentelemetry-helm-charts
+  - name: companyinfo
+    url: https://charts.companyinfo.dev
+
+helmDefaults:
+  diffArgs:
+    - "--kube-version"
+    - "1.34.0"
+
+
+releases:
+  - name: jaeger
+    namespace: monitoring
+    chart: jaegertracing/jaeger
+    version: 3.4.1
+    values:
+      - ./values/jaeger.yaml
+
+  - name: otel-collector
+    namespace: monitoring
+    chart: open-telemetry/opentelemetry-collector
+    version: 0.139.1
+    needs:
+      - monitoring/jaeger
+    values:
+      - ./values/otel-collector.yaml
+
+  - name: backend
+    namespace: default
+    chart: ../charts/generic-service
+    version: 0.1.0
+    needs:
+      - monitoring/otel-collector
+    values:
+      - ./values/backend.yaml
+
+  - name: frontend
+    namespace: default
+    chart: ../charts/generic-service
+    version: 0.1.0
+    needs:
+      - default/backend
+    values:
+      - ./values/frontend.yaml

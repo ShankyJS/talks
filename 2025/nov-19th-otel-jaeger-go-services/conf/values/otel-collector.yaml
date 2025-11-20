@@ -1,0 +1,25 @@
+mode: deployment
+image:
+  repository: "otel/opentelemetry-collector-contrib"
+
+config:
+  receivers:
+    otlp:
+      protocols:
+        grpc:
+          endpoint: "0.0.0.0:4317"
+        http:
+          endpoint: "0.0.0.0:4318"
+
+  exporters:
+    zipkin:
+      endpoint: "http://jaeger-collector.monitoring.svc.cluster.local:9411/api/v2/spans"
+    debug:
+      verbosity: detailed
+
+  service:
+    pipelines:
+      traces:
+        receivers: [otlp]
+        processors: []
+        exporters: [zipkin, debug]

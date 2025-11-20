@@ -1,0 +1,26 @@
+image:
+  repository: frontend
+  tag: latest
+  pullPolicy: Never  # Use local image
+
+envVars:
+  - name: OTEL_EXPORTER_OTLP_ENDPOINT
+    value: "otel-collector-opentelemetry-collector.monitoring.svc.cluster.local:4317"
+  - name: OTEL_SERVICE_NAME
+    value: "frontend-service"
+  - name: BACKEND_URL
+    value: "http://backend-generic-service.default.svc.cluster.local"
+  - name: PORT
+    value: "3000"
+
+ports:
+  - name: http
+    containerPort: 3000
+    protocol: TCP
+
+service:
+  ports:
+    - name: http
+      port: 80
+      protocol: TCP
+      targetPort: http

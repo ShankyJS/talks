@@ -1,0 +1,99 @@
+# Use Cassandra storage so the dependencies graph (System Architecture) can be persisted
+allInOne:
+  enabled: true
+  ingress:
+    enabled: false
+  # Add init container to wait for Cassandra and create keyspace if needed
+  extraInitContainers:
+    - name: wait-for-cassandra
+      image: busybox:1.36
+      command: ['sh', '-c']
+      args:
+        - |
+          echo "Waiting for Cassandra to be ready..."
+          until nc -z jaeger-cassandra.monitoring.svc.cluster.local 9042; do
+            echo "Waiting for Cassandra..."
+            sleep 2
+          done
+          echo "Cassandra is ready!"
+    - name: init-schema
+      image: cassandra:3.11.6
+      command: ['sh', '-c']
+      args:
+        - |
+          echo "Waiting for Cassandra to accept connections..."
+          until cqlsh -u "$$CASSANDRA_USERNAME" -p "$$CASSANDRA_PASSWORD" jaeger-cassandra.monitoring.svc.cluster.local 9042 -e "DESCRIBE KEYSPACES;" 2>/dev/null; do
+            echo "Waiting for Cassandra to be ready..."
+            sleep 3
+          done
+          echo "Creating keyspace if it doesn't exist..."
+          cqlsh -u "$$CASSANDRA_USERNAME" -p "$$CASSANDRA_PASSWORD" jaeger-cassandra.monitoring.svc.cluster.local 9042 <<EOF
+          CREATE KEYSPACE IF NOT EXISTS jaeger_v1_test WITH replication = {'class': 'SimpleStrategy', 'replication_factor': 1};
+          EOF
+          echo "Keyspace created or already exists!"
+      env:
+        - name: CASSANDRA_USERNAME
+          value: "user"
+        - name: CASSANDRA_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: jaeger-cassandra
+              key: password
+  # Add startup probe with longer delay to allow Cassandra to initialize
+  startupProbe:
+    httpGet:
+      path: /
+      port: 14269
+    initialDelaySeconds: 30
+    periodSeconds: 5
+    timeoutSeconds: 3
+    failureThreshold: 60
+  # Add readiness probe to ensure Cassandra is ready
+  readinessProbe:
+    httpGet:
+      path: /
+      port: 14269
+    initialDelaySeconds: 10
+    periodSeconds: 10
+    timeoutSeconds: 5
+    failureThreshold: 30
+
+# Disable individual components when using allInOne
+agent:
+  enabled: false
+
+collector:
+  enabled: false
+
+query:
+  enabled: false
+
+storage:
+  # Use Cassandra so Jaeger can compute and store service dependencies
+  type: cassandra
+  cassandra:
+    # Wait for Cassandra to be ready before connecting
+    servers: "jaeger-cassandra"
+    keyspace: "jaeger_v1_test"
+    # Increase connection timeout to allow Cassandra to initialize
+    connectTimeout: 10s
+    socketKeepAlive: 30s
+    # Automatically create schema/tables on deployment
+    schema:
+      create: true
+
+# Enable Cassandra so that traces and dependencies can be stored persistently
+provisionDataStore:
+  cassandra: true
+  cassandra:
+    # Ensure Cassandra is fully ready before Jaeger starts
+    datacenter: "datacenter1"
+    replicationFactor: 1
+
+# Enable Cassandra schema job to automatically create keyspace and tables
+# This job runs before Jaeger starts to ensure the schema exists
+cassandra-schema:
+  enabled: true
+  datacenter: "datacenter1"
+  mode: "prod"
+  replicationFactor: 1

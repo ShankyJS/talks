@@ -1,0 +1,15 @@
+# Talk Metadata
+# This file is used to automatically generate the talks index
+
+title: "Otel Jaeger Go Services"
+date: "2025-11-19"  # YYYY-MM-DD format
+event: "Cloud Native Vancouver: Nov 2025"  # Conference/Meetup name and location
+topics:
+  - Otel
+  - Jaeger
+  - Go
+description: "OpenTelemetry (OTEL) and Jaeger with Go"
+
+# Optional fields
+slides_url: ""  # Link to slides (if hosted separately)
+video_url: ""   # Link to recording (after the talk)

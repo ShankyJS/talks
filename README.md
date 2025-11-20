@@ -29,10 +29,10 @@ Each talk includes:
 
 ## 📊 Statistics
 
-- 🎤 **Total Talks**: 1
-- ✅ **Past**: 0
+- 🎤 **Total Talks**: 2
+- ✅ **Past**: 1
 - 🔜 **Upcoming**: 1
-- 🏷️ **Top Topics**: AWS (1), GitOps (1), Kubernetes (1)
+- 🏷️ **Top Topics**: AWS (1), GitOps (1), Go (1)
 
 ## 📑 Talks Index
 
@@ -42,6 +42,7 @@ Browse all talks by year, topic, and event. Click on any talk to access the full
 
 | Date | Talk Title | Topics | Event/Location | Materials |
 |------|------------|--------|----------------|-----------|
+| 2025-11-19 | [**Otel Jaeger Go Services**](./2025/nov-19th-otel-jaeger-go-services) | Otel, Jaeger, Go | Cloud Native Vancouver: Nov 2025 | [EN](./2025/nov-19th-otel-jaeger-go-services/README.md) / [ES](./2025/nov-19th-otel-jaeger-go-services/README-es.md) |
 | 2025-10-30 | [**Intro To Flux With EKS**](./2025/oct-30th-intro-to-flux-with-eks) | GitOps, AWS, Kubernetes | October 30th Cloud Native Vancouver event | [EN](./2025/oct-30th-intro-to-flux-with-eks/README.md) / [ES](./2025/oct-30th-intro-to-flux-with-eks/README-es.md) |
 
 
@@ -55,7 +56,10 @@ More talks and demos will be added here as they happen!
 
 - **AWS**: [Intro To Flux With EKS (2025)](./2025/oct-30th-intro-to-flux-with-eks)
 - **GitOps**: [Intro To Flux With EKS (2025)](./2025/oct-30th-intro-to-flux-with-eks)
+- **Go**: [Otel Jaeger Go Services (2025)](./2025/nov-19th-otel-jaeger-go-services)
+- **Jaeger**: [Otel Jaeger Go Services (2025)](./2025/nov-19th-otel-jaeger-go-services)
 - **Kubernetes**: [Intro To Flux With EKS (2025)](./2025/oct-30th-intro-to-flux-with-eks)
+- **Otel**: [Otel Jaeger Go Services (2025)](./2025/nov-19th-otel-jaeger-go-services)
 
 
 ## 🤝 Contributing
