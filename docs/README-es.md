@@ -30,8 +30,8 @@ Cada charla incluye:
 ## 📊 Estadísticas
 
 - 🎤 **Total de Charlas**: 2
-- ✅ **Pasadas**: 1
-- 🔜 **Próximas**: 1
+- ✅ **Pasadas**: 2
+- 🔜 **Próximas**: 0
 - 🏷️ **Temas Principales**: AWS (1), GitOps (1), Go (1)
 
 ## 📑 Índice de Charlas
