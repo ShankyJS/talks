@@ -36,6 +36,8 @@ _sharing.tf
 *.tfvars
 *.tfvars.json
 *.terraform.tfstate.backup
+.terraform/
+.terraform.lock*
 *.terraform.tfstate.backup.lock.info
 *.terraform.tfstate.lock.info
 *.terraform.tfstate.lock.info.backup

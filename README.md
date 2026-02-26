@@ -29,14 +29,22 @@ Each talk includes:
 
 ## 📊 Statistics
 
-- 🎤 **Total Talks**: 2
+- 🎤 **Total Talks**: 3
 - ✅ **Past**: 2
-- 🔜 **Upcoming**: 0
-- 🏷️ **Top Topics**: AWS (1), GitOps (1), Go (1)
+- 🔜 **Upcoming**: 1
+- 📅 **Active Years**: 2
+- 🏷️ **Top Topics**: GitOps (2), Kubernetes (2), AWS (1)
 
 ## 📑 Talks Index
 
 Browse all talks by year, topic, and event. Click on any talk to access the full demo, code, and materials.
+
+### 2026
+
+| Date | Talk Title | Topics | Event/Location | Materials |
+|------|------------|--------|----------------|-----------|
+| 2026-02-25 | [**GitOps en 30 minutos: de cero a flujo real con FluxCD**](./2026/feb-25th-gitops-flux-demo) | GitOps, FluxCD, Kubernetes, EKS, Terraform, CI/CD | Cloud Native Community Meetup | [EN](./2026/feb-25th-gitops-flux-demo/README.md) / [ES](./2026/feb-25th-gitops-flux-demo/README-es.md) |
+
 
 ### 2025
 
@@ -55,11 +63,15 @@ More talks and demos will be added here as they happen!
 ## 🏷️ Browse by Topic
 
 - **AWS**: [Intro To Flux With EKS (2025)](./2025/oct-30th-intro-to-flux-with-eks)
-- **GitOps**: [Intro To Flux With EKS (2025)](./2025/oct-30th-intro-to-flux-with-eks)
+- **CI/CD**: [GitOps en 30 minutos: de cero a flujo real con FluxCD (2026)](./2026/feb-25th-gitops-flux-demo)
+- **EKS**: [GitOps en 30 minutos: de cero a flujo real con FluxCD (2026)](./2026/feb-25th-gitops-flux-demo)
+- **FluxCD**: [GitOps en 30 minutos: de cero a flujo real con FluxCD (2026)](./2026/feb-25th-gitops-flux-demo)
+- **GitOps**: [GitOps en 30 minutos: de cero a flujo real con FluxCD (2026)](./2026/feb-25th-gitops-flux-demo), [Intro To Flux With EKS (2025)](./2025/oct-30th-intro-to-flux-with-eks)
 - **Go**: [Otel Jaeger Go Services (2025)](./2025/nov-19th-otel-jaeger-go-services)
 - **Jaeger**: [Otel Jaeger Go Services (2025)](./2025/nov-19th-otel-jaeger-go-services)
-- **Kubernetes**: [Intro To Flux With EKS (2025)](./2025/oct-30th-intro-to-flux-with-eks)
+- **Kubernetes**: [GitOps en 30 minutos: de cero a flujo real con FluxCD (2026)](./2026/feb-25th-gitops-flux-demo), [Intro To Flux With EKS (2025)](./2025/oct-30th-intro-to-flux-with-eks)
 - **Otel**: [Otel Jaeger Go Services (2025)](./2025/nov-19th-otel-jaeger-go-services)
+- **Terraform**: [GitOps en 30 minutos: de cero a flujo real con FluxCD (2026)](./2026/feb-25th-gitops-flux-demo)
 
 
 ## 🤝 Contributing

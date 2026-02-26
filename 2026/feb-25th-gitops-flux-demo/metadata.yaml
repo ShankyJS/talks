@@ -1,0 +1,18 @@
+# Talk Metadata
+# This file is used to automatically generate the talks index
+
+title: "GitOps en 30 minutos: de cero a flujo real con FluxCD"
+date: "2026-02-25"  # YYYY-MM-DD format
+event: "Cloud Native Community Meetup"
+topics:
+  - GitOps
+  - FluxCD
+  - Kubernetes
+  - EKS
+  - Terraform
+  - CI/CD
+description: "Hands-on demo showing how to set up GitOps with FluxCD on AWS EKS, from zero to a full PR-to-Production workflow"
+
+# Optional fields
+slides_url: "https://slides.com/shankyjs_/2026-gitops-en-30-min-con-flux"
+video_url: ""   # Link to recording (after the talk)
