@@ -30,8 +30,8 @@ Cada charla incluye:
 ## 📊 Estadísticas
 
 - 🎤 **Total de Charlas**: 3
-- ✅ **Pasadas**: 2
-- 🔜 **Próximas**: 1
+- ✅ **Pasadas**: 3
+- 🔜 **Próximas**: 0
 - 📅 **Años Activos**: 2
 - 🏷️ **Temas Principales**: GitOps (2), Kubernetes (2), AWS (1)
 

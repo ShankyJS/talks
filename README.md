@@ -30,8 +30,8 @@ Each talk includes:
 ## 📊 Statistics
 
 - 🎤 **Total Talks**: 3
-- ✅ **Past**: 2
-- 🔜 **Upcoming**: 1
+- ✅ **Past**: 3
+- 🔜 **Upcoming**: 0
 - 📅 **Active Years**: 2
 - 🏷️ **Top Topics**: GitOps (2), Kubernetes (2), AWS (1)
 
