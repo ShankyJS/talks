@@ -6,7 +6,7 @@ metadata:
   labels:
     app.kubernetes.io/name: demo-app
 spec:
-  replicas: 2
+  replicas: 5
   selector:
     matchLabels:
       app.kubernetes.io/name: demo-app
