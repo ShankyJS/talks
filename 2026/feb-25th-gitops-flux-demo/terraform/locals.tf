@@ -44,6 +44,6 @@ locals {
   #-----------------------------------------------------------------------------
   # 1Password
   #-----------------------------------------------------------------------------
-  onepassword_vault = "Private"
-  onepassword_item  = "flux-cd-token-github"
+  onepassword_vault = "homelab"
+  onepassword_item  = "flux_cd_token_github"
 }
